@@ -1,0 +1,37 @@
+// {
+//     "extends": "../tsconfig.json",
+//     "include": [
+//         "./**/*.ts",
+//         "../cypress.d.ts"
+//     ],
+//     "exclude": [],
+//     "compilerOptions": {
+//         "types": [
+//             "cypress",
+//             "@percy/cypress"
+//         ],
+//         "lib": [
+//             "es2015",
+//             "dom"
+//         ],
+//         "isolatedModules": false,
+//         "allowJs": true,
+//         "noEmit": true
+//     }
+// }
+{
+    "compilerOptions": {
+        "target": "es5",
+        "lib": [
+            "es5",
+            "dom"
+        ],
+        "types": [
+            "cypress",
+            "node"
+        ]
+    },
+    "include": [
+        "**/*.ts"
+    ]
+}

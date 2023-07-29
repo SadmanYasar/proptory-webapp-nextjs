@@ -1,0 +1,99 @@
+# name: Deployment pipeline
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+#   pull_request:
+#     branches: [main]
+#     types: [opened, synchronize]
+
+# jobs:
+#   deployment_pipeline:
+#     runs-on: ubuntu-20.04
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Setup Node.js environment
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: "16"
+
+#       - name: Install dependencies
+#         run: npm install
+
+#       - name: Linting code
+#         run: npm run lint
+
+#       - name: Build
+#         run: npm run build
+
+#       - name: e2e tests
+#         uses: cypress-io/github-action@v4
+#         with:
+#           command: npm run test:e2e
+#           start: npm run start
+#           wait-on: http://localhost:3000
+
+#       - name: Commit build files
+#         run: |
+#           git config --global user.name "GitHub Actions"
+#           git config --global user.email "actions@github.com"
+#           git add .
+#           git commit -m "Build files for commit $GITHUB_SHA"
+#           git push origin main
+
+#   # e2e_tests:
+#   #   needs: build
+#   #   runs-on: ubuntu-20.04
+#   #   steps:
+#   #     - name: Checkout code
+#   #       uses: actions/checkout@v2
+
+#   #     - name: Setup Node.js environment
+#   #       uses: actions/setup-node@v2
+#   #       with:
+#   #         node-version: "16"
+
+#   #     - name: Install dependencies
+#   #       run: npm install
+
+#   #     - name: e2e tests
+#   #       uses: cypress-io/github-action@v4
+#   #       with:
+#   #         command: npm run test:e2e
+#   #         start: npm run start
+#   #         wait-on: http://localhost:3000
+
+#   # commit_build_files:
+#   #   needs: e2e_tests
+#   #   if: success()
+#   #   runs-on: ubuntu-20.04
+#   #   steps:
+#   #     - name: Checkout code
+#   #       uses: actions/checkout@v2
+
+#   #     - name: Commit build files
+#   #       run: |
+#   #         git config --global user.name "GitHub Actions"
+#   #         git config --global user.email "actions@github.com"
+#   #         git add .
+#   #         git commit -m "Build files for commit $GITHUB_SHA"
+#   #         git push origin HEAD:${{ github.head_ref }}
+
+#   # tag_release:
+#   #   needs: e2e_tests
+#   #   if: ${{ success() && github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+#   #   runs-on: ubuntu-latest
+#   #   steps:
+#   #     - name: Checkout code
+#   #       uses: actions/checkout@v2
+
+#   #     - name: Create tag
+#   #       uses: anothrNick/github-tag-action@1.37.0
+#   #       with:
+#   #         default_bump: patch
+#   #       env:
+#   #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

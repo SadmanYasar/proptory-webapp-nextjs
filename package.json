@@ -1,0 +1,46 @@
+{
+  "name": "proptory-webapp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_ENV=development next dev",
+    "build": "next build",
+    "start": "NODE_ENV=production next start",
+    "start:pm2": "pm2 start npm --name \"proptory-webapp\" -- start",
+    "lint": "next lint",
+    "cypress": "NODE_ENV=test cypress open",
+    "test:e2e": "NODE_ENV=test cypress run"
+  },
+  "dependencies": {
+    "@next/font": "13.1.6",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.27",
+    "@types/react-dom": "18.0.10",
+    "bcrypt": "^5.1.0",
+    "escape-string-regexp": "^5.0.0",
+    "eslint": "8.32.0",
+    "eslint-config-next": "13.1.6",
+    "formik": "^2.2.9",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.9.0",
+    "next": "13.1.6",
+    "next-auth": "^4.19.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.7.1",
+    "react-paginate": "^8.1.4",
+    "react-share": "^4.4.1",
+    "swr": "^2.0.3",
+    "typescript": "4.9.4",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "autoprefixer": "^10.4.13",
+    "cypress": "^12.5.1",
+    "eslint-plugin-cypress": "^2.12.1",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.4"
+  }
+}

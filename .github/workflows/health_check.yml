@@ -1,0 +1,40 @@
+# name: Healthcheck
+
+# on:
+#   schedule:
+#     #will run every 20 mins
+#     - cron: "*/20 * * * *"
+
+# jobs:
+#   ping_the_app:
+#     runs-on: ubuntu-20.04
+#     steps:
+#       - name: Proptory healthcheck
+#         uses: jtalk/url-health-check-action@v2
+#         with:
+#           url: https://proptory.com/api/health
+#           max-attempts: 2
+#           retry-delay: 5s
+#           retry-all: true
+#       - name: Failure
+#         if: ${{ failure() }}
+#         id: slack_failure
+#         uses: slackapi/slack-github-action@v1.23.0
+#         with:
+#           # For posting a rich message using Block Kit
+#           payload: |
+#             {
+#               "text": "Proptory is down 👎",
+#               "blocks": [
+#                 {
+#                   "type": "section",
+#                   "text": {
+#                     "type": "mrkdwn",
+#                     "text": "Proptory is down 👎"
+#                   }
+#                 }
+#               ]
+#             }
+#         env:
+#           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+#           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

@@ -1,0 +1,6 @@
+
+            Main text Font: Prosto One
+            Slogan Text Font: BioRhyme
+            COLOR RGBA: rgba(255, 186, 212, 1.0)
+            COLOR HEX: #ffbad4
+            
