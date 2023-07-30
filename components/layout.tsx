@@ -1,3 +1,4 @@
+import Footer from './footer';
 import Nav from './nav';
 
 type LayoutProps = {
@@ -8,6 +9,7 @@ export default function Layout({ children }: LayoutProps) {
         <div className="flex min-h-screen flex-col bg-white">
             <Nav />
             <main className="grow">{children}</main>
+            <Footer />
         </div>
     );
 }
