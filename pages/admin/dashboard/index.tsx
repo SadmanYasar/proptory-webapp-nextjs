@@ -1,5 +1,6 @@
 import Head from "next/head";
 
+/* Refactor Admin stuff to a new repo for admin dashboard */
 export default function Dashboard() {
     return (
         <>

@@ -14,6 +14,7 @@
 - [Getting Started](#getting-started)
   - [Manual Setup](#manual-setup)
 - [Userflow](#userflow)
+- [Database UML Diagram](#database-uml-diagram)
 - [Roadmap](#roadmap)
 - [Support](#support)
 - [License](#license)
@@ -106,3 +107,9 @@ Reach out to the maintainer at one of the following places:
 ## License
 
 See [COPYING](COPYING) for more information.
+
+Backlog
+1. Update UI to use tailwind UI
+2. Add modal search with price filter
+3. Debounce search
+4. Update Mongoose with Prisma

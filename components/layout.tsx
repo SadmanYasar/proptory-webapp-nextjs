@@ -5,11 +5,9 @@ type LayoutProps = {
 };
 export default function Layout({ children }: LayoutProps) {
     return (
-        <div className='flex flex-col w-full h-screen'>
+        <div className="flex min-h-screen flex-col bg-white">
             <Nav />
-            <main className='w-full h-screen'>
-                {children}
-            </main>
+            <main className="grow">{children}</main>
         </div>
     );
 }
