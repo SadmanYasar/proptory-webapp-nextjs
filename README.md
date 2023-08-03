@@ -38,8 +38,8 @@ Proptory Web App
 - [Next.JS](https://nextjs.org/)
 - [Typescript](https://www.typescriptlang.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [MongoDB](https://www.mongodb.com/try/download/community)
-
+- [Prisma(Postgres)](https://www.prisma.io/)
+- [Zenstack](https://zenstack.dev/)
 ## Getting Started
 
 Production: [Click to view](https://proptory.com/)
@@ -57,8 +57,9 @@ cd proptory-webapp
 3. Use npm to install dependencies
 ```
 npm install
+
 ```
-4. Make sure mongodb is running:
+4. (Deprecated) Make sure mongodb is running:
 ```
 #Linux
 sudo systemctl restart mongod
@@ -68,7 +69,7 @@ mongod
 ```
 Refer here for more information: [Here for Windows](https://stackoverflow.com/questions/20796714/how-do-i-start-mongo-db-from-windows) and [Here for Ubuntu](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/#run-mongodb-community-edition)
 
-5. Create a .env.local file in the root directory and paste the following:
+5. (Deprecated) Create a .env.local file in the root directory and paste the following:
 ```
 MONGO_URI=mongodb://my_user:my_pwd@localhost:27017/proptory
 JWT_SECRET=YOURSECRET
