@@ -11,13 +11,12 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 interface Pagination {
     pagination: {
         currentPage: number;
-        count: number;
         pageCount: number;
     },
     items: ListingDetailed[];
 }
 
-export default function Listings({ data: { items, pagination: { count, currentPage, pageCount } } }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Listings({ data: { items, pagination: { currentPage, pageCount } } }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const router = useRouter();
     const [{ query: { searchVal, maxPrice, minPrice } }, dispatch] = useStateValue();
 
@@ -89,7 +88,7 @@ export default function Listings({ data: { items, pagination: { count, currentPa
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div className="md:text-3xl max-md:xl mx-12 py-4">{searchVal ? `Search Results on '${searchVal}'` : `${count} Total Listings`}</div>
+            {/* <div className="md:text-3xl max-md:xl mx-12 py-4">{searchVal ? `Search Results on '${searchVal}'` : `${count} Total Listings`}</div> */}
             <div className='w-full grid lg:grid-cols-3 md:grid-cols-2 max-md:grid-cols-1'>
                 {items.map((item) => {
                     return (

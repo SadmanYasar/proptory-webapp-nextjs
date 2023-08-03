@@ -17,6 +17,8 @@ import {
 import { motion, useScroll } from 'framer-motion';
 
 import { signIn, signOut, useSession } from "next-auth/react"
+import { Role } from '@prisma/client';
+import Link from 'next/link';
 
 export default function Header() {
     const { data: session, status } = useSession()
@@ -57,14 +59,15 @@ export default function Header() {
                 className="flex items-center justify-between p-4 mx-auto max-w-7xl lg:px-8"
                 aria-label="Global">
                 <div className="flex lg:flex-1">
-                    <a href="#" className="-m-1.5 p-1.5">
+                    <Link href="/" className="-m-1.5 p-1.5">
                         <span className="sr-only">Your Company</span>
                         <div className="w-14 h-14 rounded-full flex justify-center items-center">
                             <img className="w-auto pt-2" src={logo.src} alt="" />
                         </div>
-                    </a>
+                    </Link>
                 </div>
                 <div className="flex lg:hidden">
+                    <MagnifyingGlassIcon className="text-sm font-semibold leading-6 w-6 h-6 text-white mr-4" />
                     <button
                         type="button"
                         className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
@@ -109,12 +112,13 @@ export default function Header() {
                     )}
                     {session?.user && (
                         <>
-                            {session.user.image && (
-                                <span
-                                    style={{ backgroundImage: `url('${session.user.image}')` }}
-                                    className="w-8 h-8 bg-cover rounded-full"
-                                />
-                            )}
+                            {session.user.role === Role.ADMIN && (
+                                <Link
+                                    href={`/me`}
+                                    className="text-sm group font-semibold leading-6 text-white transition duration-300">
+                                    Dashboard
+                                    <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-white"></span>
+                                </Link>)}
                             <a
                                 href={`/api/auth/signout`}
                                 onClick={(e) => {
@@ -125,6 +129,12 @@ export default function Header() {
                                 Sign out
                                 <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-white"></span>
                             </a>
+                            {session.user.image && (
+                                <span
+                                    style={{ backgroundImage: `url('${session.user.image}')` }}
+                                    className="w-8 h-8 bg-cover rounded-full"
+                                />
+                            )}
                         </>
                     )}
                 </div>
@@ -133,7 +143,7 @@ export default function Header() {
                 <div className="fixed inset-0 z-10" />
                 <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full px-6 py-6 overflow-y-auto bg-black sm:max-w-sm sm:ring-1">
                     <div className="flex items-center justify-between">
-                        <a href="#" className="-m-1.5 p-1.5">
+                        <Link href="/" className="-m-1.5 p-1.5">
                             <span className="sr-only">Your Company</span>
                             <div className="w-14 h-14 rounded-full flex justify-center items-center">
                                 <img className="w-auto pt-2 pointer-events-none" src={logo.src} alt="" />
@@ -143,7 +153,7 @@ export default function Header() {
                   src="https://img.icons8.com/?size=512&id=81028&format=png"
                   alt=""
                 /> */}
-                        </a>
+                        </Link>
                         <button
                             type="button"
                             className="-m-2.5 rounded-md p-2.5 text-white"
@@ -154,35 +164,17 @@ export default function Header() {
                         </button>
                     </div>
                     <div className="flow-root mt-6">
-                        <div className="-my-6 divide-y divide-gray-500/10">
+                        <div className="-my-6 divide-y divide-red-500">
                             <div className="py-6 space-y-2">
                                 <Disclosure as="div" className="-mx-3">
                                     {({ open }) => (
-                                        <>
-                                            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-white hover:bg-red-500">
-                                                Product
+                                        <Link href={'/me'}>
+                                            <Disclosure.Button onClick={() => setMobileMenuOpen(false)} className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-white hover:bg-red-500">
+                                                Profile
                                             </Disclosure.Button>
-                                        </>
+                                        </Link>
                                     )}
                                 </Disclosure>
-                                <a
-                                    href="#"
-                                    className="block px-3 py-2 -mx-3 text-base font-semibold leading-7 text-white rounded-lg hover:bg-red-500"
-                                >
-                                    Features
-                                </a>
-                                <a
-                                    href="#"
-                                    className="block px-3 py-2 -mx-3 text-base font-semibold leading-7 text-white rounded-lg hover:bg-red-500"
-                                >
-                                    Marketplace
-                                </a>
-                                <a
-                                    href="#"
-                                    className="block px-3 py-2 -mx-3 text-base font-semibold leading-7 text-white rounded-lg hover:bg-red-500"
-                                >
-                                    Company
-                                </a>
                             </div>
                             <div className="py-6">
                                 {!session && (

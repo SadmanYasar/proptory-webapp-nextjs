@@ -3,8 +3,7 @@ import Google, { GoogleProfile } from "next-auth/providers/google"
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient, Role } from "@prisma/client";
 import { Adapter } from "next-auth/adapters";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/db";
 
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma) as Adapter,
@@ -26,15 +25,10 @@ export const authOptions: AuthOptions = {
     callbacks: {
         async jwt({ token, user }) {
             if (user) token.role = user.role
-            console.log("jwt", user)
-            console.log("token", token)
             return token
         },
-        async session({ session, token, user }) {
+        async session({ session, token }) {
             session.user.role = token.role
-            console.log("session", session)
-            console.log("user", user)
-            console.log("token", token)
             return session
         }
     }
