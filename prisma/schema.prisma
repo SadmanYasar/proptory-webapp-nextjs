@@ -6,12 +6,11 @@
 datasource db {
     provider="postgresql"
     url=env("DATABASE_URL")
-    shadowDatabaseUrl=env("SHADOW_DATABASE_URL")
 }
 
 generator client {
     provider = "prisma-client-js"
-    previewFeatures = ["referentialActions"]
+    previewFeatures = []
 }
 
 enum Role {
@@ -83,7 +82,7 @@ model VerificationToken {
 }
 
 /// @@allow('read', true)
-/// @@allow('all', auth().role == 'Admin')
+/// @@allow('all', auth() == user || auth().role == 'Admin')
 model Listing {
     id String @id() @default(cuid())
     title String
