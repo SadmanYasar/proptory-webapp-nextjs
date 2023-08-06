@@ -113,4 +113,6 @@ Backlog
 1. Update UI to use tailwind UI
 2. Add modal search with price filter
 3. Debounce search
+   1. For each Create, Upate, Delete, use appropirate search library method to manipulate the search index
+   2. Debounce search using InstantSearch.js
 4. Update Mongoose with Prisma

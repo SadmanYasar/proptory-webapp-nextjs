@@ -8,8 +8,22 @@ generator client {
 }
 
 plugin hooks {
-  provider = '@zenstackhq/swr'
-  output = 'lib/hooks'
+    provider = '@zenstackhq/swr'
+    output = 'lib/hooks'
+}
+
+plugin zod {
+    provider = '@core/zod'
+}
+
+plugin openapi {
+    provider = '@zenstackhq/openapi'
+    output = './openapi.yaml'
+    title = 'Proptory API'
+    version = '0.1.0'
+    summary = 'Created with ZenStack'
+    description = 'Proptory API created with ZenStack'
+    prefix = '/api'
 }
 
 enum Role {
@@ -19,18 +33,18 @@ enum Role {
 }
 
 model Account {
-    id                String  @id @default(cuid())
-    userId            String
-    type              String
-    provider          String
+    id String @id @default(cuid())
+    userId String
+    type String
+    provider String
     providerAccountId String
-    refresh_token     String? @db.Text
-    access_token      String? @db.Text
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String? @db.Text
-    session_state     String?
+    refresh_token String? @db.Text
+    access_token String? @db.Text
+    expires_at Int?
+    token_type String?
+    scope String?
+    id_token String? @db.Text
+    session_state String?
 
     user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -38,23 +52,23 @@ model Account {
 }
 
 model Session {
-    id           String   @id @default(cuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id String @id @default(cuid())
+    sessionToken String @unique
+    userId String
+    expires DateTime
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
+    id String @id @default(cuid())
+    name String?
+    email String? @unique
     emailVerified DateTime?
-    image         String?
-    role          Role      @default(USER)
-    accounts      Account[]
-    sessions      Session[]
-    listings      Listing[]
+    image String?
+    role Role @default(USER)
+    accounts Account[]
+    sessions Session[]
+    listings Listing[]
 
     // everyone can signup and their own profile is public
     @@allow('create,read', true)
@@ -67,26 +81,26 @@ model User {
 
 model VerificationToken {
     identifier String
-    token      String   @unique
-    expires    DateTime
+    token String @unique
+    expires DateTime
 
     @@unique([identifier, token])
 }
 
 model Listing {
-    id           String   @id @default(cuid())
-    title        String
-    description  String
-    price        Float
-    bathrooms    Int
-    bedrooms     Int
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId       String
+    id String @id @default(cuid())
+    title String
+    description String
+    price Float
+    bathrooms Int
+    bedrooms Int
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId String
     matterPortId String
-    state        String
-    city         String
-    createdAt    DateTime @default(now())
-    updatedAt    DateTime @updatedAt
+    state String
+    city String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
     // everyone can read listings
     @@allow('read', true)
